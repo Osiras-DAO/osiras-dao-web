@@ -1,21 +1,15 @@
 {
-    "name": "Osiras DAO DevContainer",
+    "name": "Osiras DAO Development",
     "build": {
-        "dockerfile": "Dockerfile",
-        "context": "."
+        "dockerfile": "Dockerfile"
     },
+    "postCreateCommand": "sudo bash scripts/install-dependencies.sh",
     "customizations": {
         "vscode": {
             "extensions": [
                 "yzhang.markdown-all-in-one",
-                "davidanson.vscode-markdownlint",
-                "esbenp.prettier-vscode"
+                "james-yu.latex-workshop"
             ]
         }
-    },
-    "postCreateCommand": "npm install -g marked@5.0.0",
-    "features": {
-        "git": "latest",
-        "github-cli": "latest"
     }
 }
