@@ -1,48 +1,39 @@
-name: Build and Deploy Osiras DAO Site
-
+name: Build and Deploy
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: write
+
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      # Checkout the repository
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
 
-      # Set up Node.js (use version 18)
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      # Install dependencies
-      - name: Install dependencies
+      - name: Install Dependencies 📦
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive texlive-latex-extra
-          npm install -g marked@5.0.0
+          sudo apt-get install -y --no-install-recommends \
+            pandoc \
+            texlive-latex-base \
+            texlive-fonts-recommended \
+            texlive-extra-utils \
+            texlive-latex-extra \
+            texlive-xetex \
+            lmodern
 
-      # Run the build script
-      - name: Build the site
+      - name: Build 🔧
         run: |
           chmod +x scripts/build.sh
           ./scripts/build.sh
 
-      # Commit and push the generated files to the public directory
-      - name: Commit generated files
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add public/whitepaper.html public/whitepaper.pdf docs/whitepaper.html docs/whitepaper.pdf
-          git commit -m "Update generated whitepaper files" || echo "No changes to commit"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: public
+          branch: gh-pages
