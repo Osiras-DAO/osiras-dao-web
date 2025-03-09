@@ -1,0 +1,20 @@
+# Ignore compiled whitepaper files in docs/
+docs/whitepaper.html
+docs/whitepaper.pdf
+
+# Ignore compiled files in public/ (since GitHub Actions manages these)
+public/whitepaper.html
+public/whitepaper.pdf
+
+# Ignore Node.js artifacts
+node_modules/
+npm-debug.log
+*.log
+
+# Ignore temporary files
+*.tmp
+*.swp
+
+# Ignore Docker-related files
+*.dockerignore
+Dockerfile.lock

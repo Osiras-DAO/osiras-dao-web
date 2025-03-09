@@ -13,7 +13,7 @@
             ]
         }
     },
-    "postCreateCommand": "npm install -g marked && sudo apt update && sudo apt install -y pandoc",
+    "postCreateCommand": "npm install -g marked@5.0.0",
     "features": {
         "git": "latest",
         "github-cli": "latest"
