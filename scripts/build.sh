@@ -52,19 +52,24 @@ build_whitepaper() {
         exit 1
     fi
 
-    log "Building HTML version..."
+    # Ensure output directory exists
+    mkdir -p public
+
+    # Generate HTML version
     pandoc "$source_file" \
         -o "$html_output" \
         --standalone \
         --template=scripts/template.html \
-        --toc
+        --toc \
+        -M title="Osiras DAO Whitepaper"
 
-    log "Building PDF version..."
+    # Generate PDF version
     pandoc "$source_file" \
         -o "$pdf_output" \
         --pdf-engine=xelatex \
         --toc \
-        --variable geometry="margin=1.2in"
+        --variable geometry="margin=1.2in" \
+        -M title="Osiras DAO Whitepaper"
 }
 
 # Main execution

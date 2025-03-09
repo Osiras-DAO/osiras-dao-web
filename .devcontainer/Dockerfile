@@ -6,6 +6,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         pandoc \
         texlive-xetex \
         texlive-fonts-recommended \
+        lmodern \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
