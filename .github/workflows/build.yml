@@ -1,0 +1,48 @@
+name: Build and Deploy Osiras DAO Site
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # Set up Node.js (for marked)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y pandoc
+          npm install -g marked
+
+      # Run the build script
+      - name: Build the site
+        run: |
+          chmod +x scripts/build.sh
+          ./scripts/build.sh
+
+      # Commit and push the generated files to the public directory
+      - name: Commit generated files
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add public/whitepaper.html public/whitepaper.pdf docs/whitepaper.html docs/whitepaper.pdf
+          git commit -m "Update generated whitepaper files" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,21 @@
+{
+    "name": "Osiras DAO DevContainer",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "."
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "yzhang.markdown-all-in-one",
+                "davidanson.vscode-markdownlint",
+                "esbenp.prettier-vscode"
+            ]
+        }
+    },
+    "postCreateCommand": "npm install -g marked && sudo apt update && sudo apt install -y pandoc",
+    "features": {
+        "git": "latest",
+        "github-cli": "latest"
+    }
+}
