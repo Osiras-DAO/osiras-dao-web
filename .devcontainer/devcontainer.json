@@ -1,15 +1,6 @@
 {
-    "name": "Osiras DAO Development",
+    "name": "Osiras DAO",
     "build": {
         "dockerfile": "Dockerfile"
-    },
-    "postCreateCommand": "sudo bash scripts/install-dependencies.sh",
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "yzhang.markdown-all-in-one",
-                "james-yu.latex-workshop"
-            ]
-        }
     }
 }

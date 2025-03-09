@@ -50,21 +50,21 @@ build_whitepaper() {
     if [ ! -f "$source_file" ]; then
         log "Error: $source_file not found"
         exit 1
-    }
+    fi
 
     log "Building HTML version..."
-    marked -i "$source_file" -o "$html_output"
+    pandoc "$source_file" \
+        -o "$html_output" \
+        --standalone \
+        --template=scripts/template.html \
+        --toc
 
     log "Building PDF version..."
     pandoc "$source_file" \
         -o "$pdf_output" \
         --pdf-engine=xelatex \
-        --variable mainfont="DejaVu Sans" \
-        --variable monofont="DejaVu Sans Mono" \
-        --variable fontsize=11pt \
-        --variable geometry="margin=1.2in" \
-        --variable links-as-notes=true \
-        --toc
+        --toc \
+        --variable geometry="margin=1.2in"
 }
 
 # Main execution

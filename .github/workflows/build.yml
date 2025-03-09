@@ -12,39 +12,23 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎️
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Dependencies 📦
+      - name: Install Dependencies
         run: |
-          # System dependencies
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
             pandoc \
-            texlive-latex-base \
-            texlive-fonts-recommended \
-            texlive-extra-utils \
-            texlive-latex-extra \
             texlive-xetex \
-            lmodern
+            texlive-fonts-recommended
 
-          # Node dependencies
-          npm install -g marked
-          
-          # Create necessary directories
-          mkdir -p public docs
-
-      - name: Build 🔧
+      - name: Build
         run: |
           chmod +x scripts/build.sh
           ./scripts/build.sh
 
-      - name: Deploy 🚀
+      - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: public

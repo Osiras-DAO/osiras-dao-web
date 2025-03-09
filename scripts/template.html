@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$title$</title>
+    <style>
+        body {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        pre { padding: 1em; background: #f5f5f5; overflow-x: auto; }
+        code { background: #f5f5f5; padding: 0.2em 0.4em; border-radius: 3px; }
+        img { max-width: 100%; }
+    </style>
+</head>
+<body>
+$if(toc)$
+<nav id="toc">
+    $table-of-contents$
+</nav>
+$endif$
+$body$
+</body>
+</html> 
