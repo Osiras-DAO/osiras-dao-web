@@ -1,0 +1,36 @@
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage[unicode=true]{hyperref}
+\usepackage{bookmark}
+
+% Page geometry and margins
+\geometry{margin=1.2in}
+
+% Header and footer setup
+\pagestyle{fancy}
+\fancyhf{} % Clear all header and footer fields
+\fancyfoot[L]{Last updated: \today}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Define tightlist command used by pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title setup
+\title{$title$}
+\date{$date$}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+$body$
+
+\end{document} 

@@ -55,21 +55,28 @@ build_whitepaper() {
     # Ensure output directory exists
     mkdir -p public
 
+    # Get current date in ISO format
+    CURRENT_DATE=$(date "+%Y-%m-%d")
+
+    # No need to copy logo since it's already in public/logo.png
+
     # Generate HTML version
     pandoc "$source_file" \
         -o "$html_output" \
         --standalone \
         --template=scripts/template.html \
         --toc \
-        -M title="Osiras DAO Whitepaper"
+        -M title="Osiras DAO Whitepaper" \
+        -M date="$CURRENT_DATE"
 
     # Generate PDF version
     pandoc "$source_file" \
         -o "$pdf_output" \
         --pdf-engine=xelatex \
+        --template=scripts/template.tex \
         --toc \
-        --variable geometry="margin=1.2in" \
-        -M title="Osiras DAO Whitepaper"
+        -M title="Osiras DAO Whitepaper" \
+        -M date="$CURRENT_DATE"
 }
 
 # Main execution
